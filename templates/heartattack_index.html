@@ -1,0 +1,60 @@
+
+
+
+{% block head %}
+
+<title>Calculator</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Heart Attack Predictor</h1>
+
+    <div class="form">
+        <form action="/math" method="POST">
+            <label for="variable1">Age</label>
+            <input type="text" name="num1" id="num1"> <br>
+
+            <label for="variable2">trestbps</label>
+            <input type="text" name="num2" id="num2"> <br>
+
+            <label for="variable3">chol</label>
+            <input type="text" name="num3" id="num3"> <br>
+
+            <label for="variable4">thalach</label>
+            <input type="text" name="num4" id="num4"> <br>
+
+            <label for="variable1">oldpeak</label>
+            <input type="text" name="num5" id="num5"> <br>
+
+            <label for="variable2">sex</label>
+            <input type="text" name="num6" id="num6"> <br>
+
+            <label for="variable3">cp</label>
+            <input type="text" name="num7" id="num7"> <br>
+
+            <label for="variable4">fbs</label>
+            <input type="text" name="num8" id="num8"> <br>
+
+            <label for="variable1">restecg</label>
+            <input type="text" name="num9" id="num9"> <br>
+
+            <label for="variable2">exang</label>
+            <input type="text" name="num10" id="num10"> <br>
+
+            <label for="variable3">slope</label>
+            <input type="text" name="num11" id="num11"> <br>
+
+            <label for="variable4">ca</label>
+            <input type="text" name="num12" id="num12"> <br>
+
+            <label for="variable1">thal</label>
+            <input type="text" name="num13" id="num13"> <br>
+
+
+            <input type="submit" value="Risk Predictor">
+        </form>
+    </div>
+</div>
+{% endblock %}
