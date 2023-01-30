@@ -12,7 +12,7 @@ def model_builder():
 
 #Loading Dataset
         df = pd.read_csv("heart.csv")
-
+        df_1 = pd.read_csv("heart.csv")
 #Differentiating categorical and numerical variables
         categorical_val = []
         continous_val = []
@@ -23,7 +23,8 @@ def model_builder():
                 continous_val.append(column)
     
         categorical_val.remove("target")
-        dataset = pd.get_dummies(df, columns = categorical_val)
+        df_1.drop()
+        dataset = pd.get_dummies(df_1, columns = categorical_val)
 
 #Splitting the Data
         X_train,X_test,Y_train,Y_test = train_test_split(dataset,df["target"],test_size=0.3)
@@ -63,7 +64,7 @@ def model_builder():
             best_model_index = acc_list.index((max(acc_list)))
             mod_list = [model_rf,model_knn,model_lr,model_svc]
             #Dumping Model
-            joblib.dump(mod_list[best_model_index],r"E:/PROJECTS/HEART-ATTACK-PREDICTION-1/model.pkl")
+            joblib.dump(mod_list[best_model_index],r"E:/PROJECTS/HEART-ATTACK-PREDICTION/model.pkl")
             return model_rf
         
         else:

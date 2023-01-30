@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import pickle
+
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
@@ -49,25 +49,29 @@ def math_operation():
     L.append(int(variable12))
     L.append(int(variable13))
 
+    df = pd.read_csv("heart.csv")
+    df.drop(["target"],axis=1,inplace=True)
 
-    column = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach','exang', 'oldpeak', 'slope', 'ca', 'thal',]
+    column = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach','exang', 'oldpeak', 'slope', 'ca', 'thal']
 
     categorical_val = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal']
 
     data = pd.DataFrame(np.array(L).reshape(1,13), columns = column)
 
-    dataset = pd.get_dummies(data, columns = categorical_val)
+    df = pd.concat([df, data], ignore_index = True)
+
+    dataset = pd.get_dummies(df, columns = categorical_val)
 
     
     scaler = StandardScaler()
-    scaled = scaler.fit_transform(np.array(dataset))
+    scaled = scaler.fit_transform(np.array(dataset.tail(1)))
 
-    if os.path.exists("E:/PROJECTS/HEART-ATTACK-PREDICTION-1/model.pkl"):
-        model = joblib.load(r'E:/PROJECTS/HEART-ATTACK-PREDICTION-1/model.pkl')
-        results = model.predict(scaled)
+    if os.path.exists("E:/PROJECTS/HEART-ATTACK-PREDICTION/model.pkl"):
+       model = joblib.load(r'E:/PROJECTS/HEART-ATTACK-PREDICTION/model.pkl')
+       results = model.predict(scaled)
     else:
         x = model_builder()
-        model = joblib.load(r'E:/PROJECTS/HEART-ATTACK-PREDICTION-1/model.pkl')
+        model = joblib.load(r'E:/PROJECTS/HEART-ATTACK-PREDICTION/model.pkl')
         results = model.predict(scaled)
 
     return render_template('results.html', result=results)
