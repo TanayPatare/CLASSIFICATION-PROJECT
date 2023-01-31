@@ -68,11 +68,16 @@ def math_operation():
 
     if os.path.exists("E:/PROJECTS/HEART-ATTACK-PREDICTION/model.pkl"):
        model = joblib.load(r'E:/PROJECTS/HEART-ATTACK-PREDICTION/model.pkl')
-       results = model.predict(scaled)
+       prediction = model.predict(scaled)[0]
     else:
         x = model_builder()
         model = joblib.load(r'E:/PROJECTS/HEART-ATTACK-PREDICTION/model.pkl')
-        results = model.predict(scaled)
+        prediction = model.predict(scaled)[0]
+
+    if prediction == 1:
+        results = "YOUR ARE AT VERY HIGH RISK"
+    else:
+        results = "YOU ARE HEALTHY"
 
     return render_template('results.html', result=results)
 
